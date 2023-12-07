@@ -1,0 +1,35 @@
+# OpenSSL Root CA configuration file
+
+[ req ]
+distinguished_name  = req_distinguished_name
+req_extensions      = v3_req
+x509_extensions     = v3_ca
+string_mask         = utf8only
+
+[ req_distinguished_name ]
+countryName         = Country Name (2 letter code)
+countryName_default = US
+stateOrProvinceName = State or Province Name (full name)
+stateOrProvinceName_default = California
+localityName        = Locality Name (eg, city)
+localityName_default = San Francisco
+organizationName    = Organization Name (eg, company)
+organizationName_default = My Company
+commonName          = Common Name (e.g., your name or your server's hostname)
+commonName_default  = Root CA
+
+[ v3_req ]
+basicConstraints    = CA:TRUE
+keyUsage            = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName      = @alt_names
+
+[ v3_ca ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+basicConstraints    = critical, CA:TRUE, pathlen:0
+keyUsage            = keyCertSign, cRLSign
+subjectAltName      = @alt_names
+
+[ alt_names ]
+DNS.1 = localhost
+IP.1 = 127.0.0.1
